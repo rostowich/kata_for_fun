@@ -9,11 +9,11 @@ import org.junit.jupiter.params.provider.CsvSource;
 
 class KataForFunTest {
 
-	private KataForFun KataForFun;
+	private Convertor KataForFun;
 
 	@BeforeEach
 	public void setup() {
-		KataForFun = new KataForFun();
+		KataForFun = new Convertor();
 	}
 
 	@DisplayName("Should take a list of integer and test its converted values")

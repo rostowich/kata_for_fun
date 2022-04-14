@@ -1,39 +1,20 @@
 package com.lacombedulionvert.kataforfun;
 
-import org.apache.commons.lang3.StringUtils;
+import java.util.stream.Stream;
 
-public enum Convertor {
-
-	KATA(3, "Kata"),
-	FOR(5, "For"),
-	FUN(7, "Fun"){
-		@Override
-		public boolean isDivisible(int output) {
-			return false;
-		}
-	};
+public class Convertor {
 	
-	private final int number;
-	
-	private final String value;
+	public String convertInput(int input) {
+		StringBuilder result = new StringBuilder();
+		//Divisors have a higher precedence, so we start by the divisors rule
+		Stream.of(KataForFun.values()).forEach(
+				(convertor -> result.append(convertor.printValueForDivisibleRule(input)))
+		);
 
-    Convertor(int number, String value) {
-		this.number = number;
-		this.value = value;
-	}
+		Stream.of(KataForFun.values()).forEach(
+				(convertor -> result.append(convertor.printValueForContainRule(input)))
+		);
 		
-	public String printValueForDivisibleRule(int input) {		
-		return isDivisible(input) ? value : "";		
+		return result.length() == 0 ? Integer.toString(input) : result.toString();
 	}
-	
-	public String printValueForContainRule(int input) {
-		int occurrenceCount = StringUtils.countMatches(String.valueOf(input),
-				String.valueOf(number));
-		return StringUtils.repeat(value, occurrenceCount);
-	}
-	
-	public boolean isDivisible (int input) {
-		return input % number == 0;
-	}
-
 }

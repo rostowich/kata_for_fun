@@ -6,9 +6,9 @@ public class ApplicationView {
 	
 	private final ConsoleReader consoleReader;
 	
-	private final KataForFun processor;
+	private final Convertor processor;
 	
-	public ApplicationView(ConsolePrinter consolePrinter, ConsoleReader consoleReader, KataForFun processor) {
+	public ApplicationView(ConsolePrinter consolePrinter, ConsoleReader consoleReader, Convertor processor) {
 		this.consolePrinter = consolePrinter;
 		this.consoleReader = consoleReader;
 		this.processor = processor;
