@@ -2,31 +2,31 @@ package com.lacombedulionvert.kataforfun;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.CsvSource;
 
-public class KataForFunTest {
+class KataForFunTest {
 
 	private KataForFun KataForFun;
-	
-	@Before
-	public void setup() throws Exception {
+
+	@BeforeEach
+	public void setup() {
 		KataForFun = new KataForFun();
 	}
-	
-	@Test
-	public void take_basic_exemple_should_return_values() throws Exception{
-		assertThat(KataForFun.convertInput(1)).isEqualTo("1");
-		assertThat(KataForFun.convertInput(2)).isEqualTo("2");
-		assertThat(KataForFun.convertInput(3)).isEqualTo("KataKata");
-		assertThat(KataForFun.convertInput(5)).isEqualTo("ForFor");
-		assertThat(KataForFun.convertInput(7)).isEqualTo("Fun");
-		assertThat(KataForFun.convertInput(9)).isEqualTo("Kata");
-		assertThat(KataForFun.convertInput(51)).isEqualTo("KataFor");
-		assertThat(KataForFun.convertInput(53)).isEqualTo("KataFor");
-		assertThat(KataForFun.convertInput(33)).isEqualTo("KataKataKata");
-		assertThat(KataForFun.convertInput(27)).isEqualTo("KataFun");
-		assertThat(KataForFun.convertInput(15)).isEqualTo("KataForFor");
-		assertThat(KataForFun.convertInput(35)).isEqualTo("ForKataFor");
+
+	@DisplayName("Should take a list of integer and test its converted values")
+	@ParameterizedTest
+	@CsvSource({"1,1", "2,2", "3,KataKata", "5,ForFor", "7,Fun", "9,Kata",
+			"51,KataFor", "53,KataFor", "33,KataKataKata", "27,KataFun", "15,KataForFor",
+			"35,ForKataFor"})
+	void take_basic_example_should_return_values(String input, String expected){
+
+		int inputValue = Integer.parseInt(input);
+
+		String result = KataForFun.convertInput(inputValue);
+
+		assertThat(result).isEqualTo(expected);
 	}
 }

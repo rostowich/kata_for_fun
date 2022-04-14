@@ -2,22 +2,22 @@ package com.lacombedulionvert.kataforfun;
 
 import org.apache.commons.lang3.StringUtils;
 
-public enum ConvertorEnum {
+public enum Convertor {
 
 	KATA(3, "Kata"),
 	FOR(5, "For"),
 	FUN(7, "Fun"){
 		@Override
-		public String printValueForDivisibleRule(int output) {
-			return "";
+		public boolean isDivisible(int output) {
+			return false;
 		}
 	};
 	
-	private int number;
+	private final int number;
 	
-	private String value;
+	private final String value;
 
-    private ConvertorEnum(int number, String value) {
+    Convertor(int number, String value) {
 		this.number = number;
 		this.value = value;
 	}
@@ -27,16 +27,13 @@ public enum ConvertorEnum {
 	}
 	
 	public String printValueForContainRule(int input) {
-		int occurrenceCount = occurrenceOf(input, number);
+		int occurrenceCount = StringUtils.countMatches(String.valueOf(input),
+				String.valueOf(number));
 		return StringUtils.repeat(value, occurrenceCount);
 	}
 	
-	private boolean isDivisible (int input) {
+	public boolean isDivisible (int input) {
 		return input % number == 0;
 	}
-	
-	private int occurrenceOf(Integer number, Integer subNumber) {
-		return StringUtils.countMatches(String.valueOf(number),
-				String.valueOf(subNumber));
-	}
+
 }
